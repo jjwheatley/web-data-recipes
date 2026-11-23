@@ -15,7 +15,7 @@ Get each new episode as searchable text with timestamps, plus SRT and VTT subtit
 }
 ```
 
-Replace the feed with your own. You can use a podcast RSS feed, an Apple Podcasts show link, or a direct audio or video file. YouTube, TikTok and Spotify links are not supported. This test costs $0.01.
+Replace the feed with your own. You can use a podcast RSS feed, an Apple Podcasts show link, or a direct audio or video file. YouTube, TikTok and Spotify links are not supported. This test costs $0.012.
 
 ## 2. Turn on new episodes only
 
@@ -35,10 +35,10 @@ When the sample looks good, use this input:
 Keep the same `monitorName` on every run, because that is how the tool remembers what it has done.
 
 - **The first run** transcribes the newest episode. Older episodes are ignored, so you don't pay for the back catalogue. To start with more, raise `maxEpisodesPerFeed`.
-- **Later runs** transcribe only episodes published since. A run with nothing new costs nothing.
+- **Later runs** transcribe only episodes published since. A run with nothing new costs only the $0.002 run fee.
 - **Several new episodes at once:** any above `maxEpisodesPerFeed` are picked up on the next run.
 
-In our test, the first run transcribed one episode, an immediate second run found nothing and charged nothing, and a simulated new episode was transcribed once.
+In our test, the first run transcribed one episode, an immediate second run found nothing and charged only the run fee, and a simulated new episode was transcribed once.
 
 ## 3. Put it on a schedule
 
@@ -79,4 +79,4 @@ One row per file, with links to SRT, VTT and TXT files. This is real output from
 | Built-in Whisper | $0.01 | $0.30 |
 | Your own Groq or OpenAI-compatible key | $0.002, plus your provider's charges | $0.06, plus your provider's charges |
 
-Files that fail to download and minutes beyond `maxMinutesPerFile` are free.
+Every run also has a flat $0.002 fee, which is about $0.06 a month on a daily schedule. Files that fail to download and minutes beyond `maxMinutesPerFile` are not charged.
