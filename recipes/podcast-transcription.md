@@ -1,10 +1,8 @@
-# Transcribe podcast episodes to text and subtitles
+# Transcribe every new podcast episode automatically
 
-Turn the latest episodes of a podcast into searchable text with timestamps, plus SRT and VTT subtitle files.
+Get each new episode as searchable text with timestamps, plus SRT and VTT subtitle files. You pay only for episodes that are new.
 
 **Tool:** [Audio & Video Transcription](https://apify.com/squarish_altruism/transcribe)
-
-> **Don't put this recipe on a schedule.** The tool doesn't yet remember which episodes it has transcribed, so a scheduled run would transcribe and charge for the same episodes again.
 
 ## 1. Try one minute first
 
@@ -19,20 +17,38 @@ Turn the latest episodes of a podcast into searchable text with timestamps, plus
 
 Replace the feed with your own. You can use a podcast RSS feed, an Apple Podcasts show link, or a direct audio or video file. YouTube, TikTok and Spotify links are not supported. This test costs $0.01.
 
-## 2. Run the full job
+## 2. Turn on new episodes only
 
-When the sample looks good, raise the limits:
+When the sample looks good, use this input:
 
 ```json
 {
   "sources": ["https://feeds.npr.org/510289/podcast.xml"],
-  "maxEpisodesPerFeed": 3,
+  "onlyNewEpisodes": true,
+  "monitorName": "my-podcasts",
+  "maxEpisodesPerFeed": 1,
   "maxMinutesPerFile": 180,
   "language": "en"
 }
 ```
 
-Setting the language improves accuracy. Only transcribe media you have the right to process.
+Keep the same `monitorName` on every run, because that is how the tool remembers what it has done.
+
+- **The first run** transcribes the newest episode. Older episodes are ignored, so you don't pay for the back catalogue. To start with more, raise `maxEpisodesPerFeed`.
+- **Later runs** transcribe only episodes published since. A run with nothing new costs nothing.
+- **Several new episodes at once:** any above `maxEpisodesPerFeed` are picked up on the next run.
+
+In our test, the first run transcribed one episode, an immediate second run found nothing and charged nothing, and a simulated new episode was transcribed once.
+
+## 3. Put it on a schedule
+
+Save the input as a task, then add the task to a **daily** schedule in Apify Console. Leave enough time for one run to finish before the next starts, because overlapping runs could both pick up the same new episode.
+
+## 4. Send the transcripts somewhere useful
+
+Add an integration to the task, such as Slack, email, a webhook, Zapier, Make or n8n, to pass each transcript to your notes, CMS or AI tool. In Zapier, Make or n8n, add a filter step to skip runs with no new episodes.
+
+Only transcribe media you have the right to process.
 
 ## What you get
 

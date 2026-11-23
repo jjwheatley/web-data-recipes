@@ -6,7 +6,7 @@ Copy-paste recipes for common web monitoring and data jobs. No code or server is
 |---|---|---|
 | [Website change alerts](recipes/website-change-alerts.md) | Find out when a competitor changes its pricing, terms or landing pages | 10 pages checked daily: about $1.20 a month |
 | [New job alerts](recipes/new-job-alerts.md) | Get only the new roles from a list of target companies | $2 per 1,000 jobs, and jobs already seen are free |
-| [Podcast transcription](recipes/podcast-transcription.md) | Turn podcast episodes into text and subtitles | A 30-minute episode: $0.30 |
+| [Podcast transcription](recipes/podcast-transcription.md) | Turn each new episode into text and subtitles | A 30-minute episode: $0.30, and runs with nothing new are free |
 
 ## How to use a recipe
 1. Open the tool linked in the recipe. You need an Apify account.
